@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,9 +8,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text ScoreText;
-    public Text PlayerNameText;
-    public Text BestScoreText;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI PlayerNameText;
+    public TextMeshProUGUI BestScoreText;
     public GameObject GameOverScreen;
 
     private bool m_Started = false;
@@ -42,21 +43,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void AddPoint(int point)
-    {
-        m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
-    }
+    //void AddPoint(int point)
+    //{
+    //    m_Points += point;
+    //    ScoreText.text = $"Score : {m_Points}";
+    //}
 
-    public void GameOver()
-    {
-        m_GameOver = true;
-        GameOverScreen.SetActive(true);
+    //public void GameOver()
+    //{
+    //    m_GameOver = true;
+    //    GameOverScreen.SetActive(true);
 
-        if (m_Points > MainManager.Instance.bestScore)
-        {
-            MainManager.Instance.bestScore = m_Points;
-            MainManager.Instance.SaveBestScore();
-        }
-    }
+    //    if (m_Points > MainManager.Instance.bestScore)
+    //    {
+    //        MainManager.Instance.bestScore = m_Points;
+    //        MainManager.Instance.SaveBestScore();
+    //    }
+    //}
 }
