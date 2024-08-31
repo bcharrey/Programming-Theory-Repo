@@ -1379,11 +1379,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4076e9a757be4f4c999c6c37b49e86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
+  moveSpeed: 25
   attackRotationSpeed: 2000
   attackCycleDuration: 5
   weapon: {fileID: 718268448529559897}
-  powerUpAttackCycles: 2
+  AreaLimitUpperLeft: {fileID: 0}
+  AreaLimitLowerLeft: {fileID: 0}
 --- !u!54 &1323960117129055595
 Rigidbody:
   m_ObjectHideFlags: 0

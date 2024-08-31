@@ -9,13 +9,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI ScoreText;
+    private TextMeshProUGUI currentScoreText;
     [SerializeField]
-    private TextMeshProUGUI PlayerNameText;
+    private TextMeshProUGUI playerNameText;
     [SerializeField]
-    private TextMeshProUGUI BestScoreText;
+    private TextMeshProUGUI bestScoreText;
     [SerializeField]
-    private GameObject GameOverScreen;
+    private GameObject gameOverScreen;
 
     private bool m_Started = false;
     private int m_Points;
@@ -26,10 +26,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerNameText.text = $"{MainManager.Instance.playerName} :";
+        playerNameText.text = $"{MainManager.Instance.playerName} :";
 
         MainManager.Instance.LoadBestScore();
-        BestScoreText.text = $"Best Score : {MainManager.Instance.bestScorePlayerName} : {MainManager.Instance.bestScore}";
+        bestScoreText.text = $"Best Score : {MainManager.Instance.bestScorePlayerName} : {MainManager.Instance.bestScore}";
     }
 
     private void Update()

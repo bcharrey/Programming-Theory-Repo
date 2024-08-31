@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,9 +17,9 @@ public class PlayerController : MonoBehaviour
     //[SerializeField]
     //private int powerUpAttackCycles = 2;
     [SerializeField]
-    private Transform AreaLimitUpperLeft;
+    private Transform areaLimitUpperLeft;
     [SerializeField]
-    private Transform AreaLimitLowerLeft;
+    private Transform areaLimitLowerLeft;
 
     private Rigidbody rb;
     //private int killCount = 0;
@@ -48,11 +49,11 @@ public class PlayerController : MonoBehaviour
         // Apply movement using Rigidbody
         rb.velocity = move * moveSpeed;
 
-        //// Clamp the player's position within the screen bounds
-        //Vector3 clampedPosition = rb.position;
-        //clampedPosition.x = Mathf.Clamp(clampedPosition.x, -10f, 10f); // Replace -10f and 10f with your desired x bounds
-        //clampedPosition.z = Mathf.Clamp(clampedPosition.z, -10f, 10f); // Replace -10f and 10f with your desired z bounds
-        //rb.position = clampedPosition;
+        // Clamp the player's position within the screen bounds
+        float leftLimitX = Math.Abs(areaLimitLowerLeft.position.x);
+        float clampedPositionX = Mathf.Clamp(rb.position.x, -leftLimitX, leftLimitX);
+        float clampedPositionZ = Mathf.Clamp(rb.position.z, areaLimitLowerLeft.position.z, areaLimitUpperLeft.position.z);
+        rb.position = new Vector3(clampedPositionX, rb.position.y, clampedPositionZ);
 
         // Weapon attack
         if (Time.time % attackCycleDuration < attackCycleDuration / 2)
