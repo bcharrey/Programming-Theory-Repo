@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 25f;
-    public float attackRotationSpeed = 2000f;
-    public float attackCycleDuration = 5f;
-    public GameObject weapon;
-    public int powerUpAttackCycles = 2;
+    [SerializeField]
+    private float moveSpeed = 25f;
+    [SerializeField]
+    private float attackRotationSpeed = 2000f;
+    [SerializeField]
+    private float attackCycleDuration = 5f;
+    [SerializeField]
+    private GameObject weapon;
+    //[SerializeField]
+    //private int powerUpAttackCycles = 2;
+    [SerializeField]
+    private Transform AreaLimitUpperLeft;
+    [SerializeField]
+    private Transform AreaLimitLowerLeft;
 
     private Rigidbody rb;
     //private int killCount = 0;
@@ -38,6 +47,12 @@ public class PlayerController : MonoBehaviour
 
         // Apply movement using Rigidbody
         rb.velocity = move * moveSpeed;
+
+        //// Clamp the player's position within the screen bounds
+        //Vector3 clampedPosition = rb.position;
+        //clampedPosition.x = Mathf.Clamp(clampedPosition.x, -10f, 10f); // Replace -10f and 10f with your desired x bounds
+        //clampedPosition.z = Mathf.Clamp(clampedPosition.z, -10f, 10f); // Replace -10f and 10f with your desired z bounds
+        //rb.position = clampedPosition;
 
         // Weapon attack
         if (Time.time % attackCycleDuration < attackCycleDuration / 2)

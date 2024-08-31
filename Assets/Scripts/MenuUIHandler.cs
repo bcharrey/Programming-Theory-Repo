@@ -14,8 +14,10 @@ using UnityEngine.UI;
 [DefaultExecutionOrder(1000)]
 public class MenuUIHandler : MonoBehaviour
 {
-    public TMP_InputField nameInputField;
-    public TextMeshProUGUI nameText;
+    [SerializeField]
+    private TMP_InputField nameInputField;
+    [SerializeField]
+    private TextMeshProUGUI nameText;
 
     public void StartGame()
     {
