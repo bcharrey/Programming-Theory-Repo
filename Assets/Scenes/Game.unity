@@ -3205,10 +3205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400a446864f19c8489de981bd769783c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  currentScoreText: {fileID: 1120683692}
   playerNameText: {fileID: 191756233}
   bestScoreText: {fileID: 1549657963}
-  GameOverScreen: {fileID: 0}
+  gameOverScreen: {fileID: 416339772}
 --- !u!4 &2111258143
 Transform:
   m_ObjectHideFlags: 0
