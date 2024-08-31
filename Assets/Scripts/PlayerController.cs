@@ -33,6 +33,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Vector3 move = CalculateMovementInput();
+        HandleMovement(move);
+        HandleAttack(move);
+    }
+
+    private Vector3 CalculateMovementInput()
+    {
         // Get input from keyboard
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
@@ -46,6 +53,11 @@ public class PlayerController : MonoBehaviour
             move.Normalize();
         }
 
+        return move;
+    }
+
+    private void HandleMovement(Vector3 move)
+    {
         // Apply movement using Rigidbody
         rb.velocity = move * moveSpeed;
 
@@ -54,8 +66,10 @@ public class PlayerController : MonoBehaviour
         float clampedPositionX = Mathf.Clamp(rb.position.x, -leftLimitX, leftLimitX);
         float clampedPositionZ = Mathf.Clamp(rb.position.z, areaLimitLowerLeft.position.z, areaLimitUpperLeft.position.z);
         rb.position = new Vector3(clampedPositionX, rb.position.y, clampedPositionZ);
+    }
 
-        // Weapon attack
+    private void HandleAttack(Vector3 move)
+    {
         if (Time.time % attackCycleDuration < attackCycleDuration / 2)
         {
             transform.Rotate(0, attackRotationSpeed * Time.deltaTime, 0);
@@ -71,7 +85,6 @@ public class PlayerController : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(move);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
-
         }
     }
 

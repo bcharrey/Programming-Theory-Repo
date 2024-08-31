@@ -9,13 +9,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI currentScoreText;
+    private TextMeshProUGUI scoreText;
     [SerializeField]
     private TextMeshProUGUI playerNameText;
     [SerializeField]
     private TextMeshProUGUI bestScoreText;
     [SerializeField]
-    private GameObject gameOverScreen;
+    private GameObject GameOverScreen;
 
     private bool m_Started = false;
     private int m_Points;
