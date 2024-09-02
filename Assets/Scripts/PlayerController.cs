@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
+
     [SerializeField]
     private float moveSpeed = 25f;
     [SerializeField]
@@ -19,6 +21,17 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private float rotationSpeed = 50f;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     void Start()
     {

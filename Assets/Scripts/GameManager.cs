@@ -39,8 +39,6 @@ public class GameManager : MonoBehaviour
     private float enemySpawnInitialDelay = 4f;
     private float enemySpawnDelayReduction = 0.95f;
     private float enemySpawnDelayResetThreshhold = 0.2f;
-    //private float spawnRangeX = 11f;
-    //private float spawnRangeY = 7.5f;
     private float enemySpawnTimer = 0f;
     private float currentEnemySpawnDelay = 0f;
 
@@ -59,8 +57,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
     }
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         playerNameText.text = $"{MainManager.Instance.playerName} :";
