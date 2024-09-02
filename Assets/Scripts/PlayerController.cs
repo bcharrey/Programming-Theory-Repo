@@ -16,10 +16,6 @@ public class PlayerController : MonoBehaviour
     private GameObject weapon;
     //[SerializeField]
     //private int powerUpAttackCycles = 2;
-    [SerializeField]
-    private Transform areaLimitUpperLeft;
-    [SerializeField]
-    private Transform areaLimitLowerLeft;
 
     private Rigidbody rb;
     //private int killCount = 0;
@@ -62,9 +58,10 @@ public class PlayerController : MonoBehaviour
         rb.velocity = move * moveSpeed;
 
         // Clamp the player's position within the screen bounds
-        float leftLimitX = Math.Abs(areaLimitLowerLeft.position.x);
+        float leftLimitX = Math.Abs(GameManager.Instance.AreaLimitLowerLeft.position.x);
         float clampedPositionX = Mathf.Clamp(rb.position.x, -leftLimitX, leftLimitX);
-        float clampedPositionZ = Mathf.Clamp(rb.position.z, areaLimitLowerLeft.position.z, areaLimitUpperLeft.position.z);
+        float clampedPositionZ = Mathf.Clamp(rb.position.z, GameManager.Instance.AreaLimitLowerLeft.position.z,
+            GameManager.Instance.AreaLimitUpperLeft.position.z);
         rb.position = new Vector3(clampedPositionX, rb.position.y, clampedPositionZ);
     }
 
