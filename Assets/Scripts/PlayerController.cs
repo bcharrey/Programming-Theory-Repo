@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     //private int powerUpAttackCycles = 2;
 
     private Rigidbody rb;
-    //private int killCount = 0;
     private float rotationSpeed = 50f;
 
     void Start()
@@ -67,6 +66,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAttack(Vector3 move)
     {
+        // Player attacks by spinning with his weapon for attackCycleDuration / 2
+        // Then does not attack until attackCycleDuration / 2
         if (Time.time % attackCycleDuration < attackCycleDuration / 2)
         {
             transform.Rotate(0, attackRotationSpeed * Time.deltaTime, 0);
