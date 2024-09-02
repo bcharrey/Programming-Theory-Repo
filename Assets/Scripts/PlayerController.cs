@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour
     //private int powerUpAttackCycles = 2;
 
     private Rigidbody rb;
-    private float rotationSpeed = 50f;
+
+    private readonly float rotationSpeed = 50f;
 
     private void Awake()
     {

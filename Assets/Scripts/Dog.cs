@@ -14,6 +14,6 @@ public class Dog : Enemy
         direction.Normalize();
 
         // Move the dog towards the player
-        transform.position += direction * Speed * Time.deltaTime;
+        transform.position += Speed * Time.deltaTime * direction;
     }
 }

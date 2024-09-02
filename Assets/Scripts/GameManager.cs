@@ -36,16 +36,11 @@ public class GameManager : MonoBehaviour
     private BoxCollider[] enemySpawnAreas;
 
     // Enemy spawn
-    private float enemySpawnInitialDelay = 4f;
-    private float enemySpawnDelayReduction = 0.95f;
-    private float enemySpawnDelayResetThreshhold = 0.2f;
     private float enemySpawnTimer = 0f;
-    private float currentEnemySpawnDelay = 0f;
+    private float enemySpawnDelay = 4f;
 
-    private bool m_Started = false;
     //private int m_Points;
-
-    private bool m_GameOver = false;
+    //private bool m_GameOver = false;
 
     private void Awake()
     {
@@ -65,45 +60,23 @@ public class GameManager : MonoBehaviour
         MainManager.Instance.LoadBestScore();
         bestScoreText.text = $"Best Score : {MainManager.Instance.bestScorePlayerName} : {MainManager.Instance.bestScore}";
 
-        // Enemy spawn
-        currentEnemySpawnDelay = enemySpawnInitialDelay;
         // Spawn an Enemy at the start
-        enemySpawnTimer = currentEnemySpawnDelay;
+        enemySpawnTimer = enemySpawnDelay;
     }
 
     private void Update()
     {
-        if (!m_Started)
+        // Enemy spawn
+        enemySpawnTimer += Time.deltaTime;
+
+        if (enemySpawnTimer >= enemySpawnDelay)
         {
-            // Enemy spawn
-            enemySpawnTimer += Time.deltaTime;
+            int randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
 
-            if (enemySpawnTimer >= currentEnemySpawnDelay)
-            {
-                int randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            Instantiate(enemyPrefabs[randomIndex], GenerateSpawnPosition(),
+                enemyPrefabs[randomIndex].transform.rotation);
 
-                Instantiate(enemyPrefabs[randomIndex], GenerateSpawnPosition(),
-                    enemyPrefabs[randomIndex].transform.rotation);
-
-                if (currentEnemySpawnDelay > enemySpawnDelayResetThreshhold)
-                {
-                    currentEnemySpawnDelay *= enemySpawnDelayReduction;
-                }
-                else
-                {
-                    enemySpawnInitialDelay *= enemySpawnDelayReduction;
-                    currentEnemySpawnDelay = enemySpawnInitialDelay;
-                }
-
-                enemySpawnTimer = 0f;
-            }
-        }
-        else if (m_GameOver)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            enemySpawnTimer = 0f;
         }
     }
 

@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
 
     protected Rigidbody Rb { get; private set; }
     protected Vector3 XZDirectionUnitVector { get; private set; }
-    protected float RotationSpeed { get; private set; } = 10000f;
-
+    protected readonly float RotationSpeed = 10000f;
+    
     // Start is called before the first frame update
     void Start()
     {
