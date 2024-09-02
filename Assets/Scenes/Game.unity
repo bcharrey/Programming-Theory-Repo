@@ -3549,7 +3549,9 @@ MonoBehaviour:
   gameOverScreen: {fileID: 416339772}
   m_areaLimitUpperLeft: {fileID: 2140226801}
   m_areaLimitLowerLeft: {fileID: 2036014044}
-  enemyPrefab: {fileID: 8904647488523182720, guid: 2d7f81ec53692034f898f7218481bb30, type: 3}
+  enemyPrefabs:
+  - {fileID: 3888267440409907295, guid: d82a4a1505528cf4fb0c65e1fae8b579, type: 3}
+  - {fileID: 8904647488523182720, guid: 2d7f81ec53692034f898f7218481bb30, type: 3}
   enemySpawnAreas:
   - {fileID: 1985241780}
   - {fileID: 2125460541}

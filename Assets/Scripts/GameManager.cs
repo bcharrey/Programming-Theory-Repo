@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     // Enemy spawn
     [SerializeField]
-    private GameObject enemyPrefab;
+    private GameObject[] enemyPrefabs;
     [SerializeField]
     private BoxCollider[] enemySpawnAreas;
 
@@ -80,8 +80,10 @@ public class GameManager : MonoBehaviour
 
             if (enemySpawnTimer >= currentEnemySpawnDelay)
             {
-                Instantiate(enemyPrefab, GenerateSpawnPosition(),
-                    enemyPrefab.transform.rotation);
+                int randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+
+                Instantiate(enemyPrefabs[randomIndex], GenerateSpawnPosition(),
+                    enemyPrefabs[randomIndex].transform.rotation);
 
                 if (currentEnemySpawnDelay > enemySpawnDelayResetThreshhold)
                 {
