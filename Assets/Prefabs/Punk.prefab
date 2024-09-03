@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3888267440409907295}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.24, y: 0, z: 5.12}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 5
+  m_powerUp: {fileID: 6939064669948421151, guid: 1a1a4d5796a78304397c480298b345e4, type: 3}
+  m_powerUpRotation: {x: 0, y: 0, z: 0, w: 0}
+  powerUpDropChance: 0.9
 --- !u!54 &6946134270636243523
 Rigidbody:
   m_ObjectHideFlags: 0

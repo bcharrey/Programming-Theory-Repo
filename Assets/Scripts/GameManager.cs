@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     private float enemySpawnTimer = 0f;
     private float enemySpawnDelay = 4f;
 
-    public int m_Points;
+    private int m_Points;
     //private bool m_GameOver = false;
 
     private void Awake()

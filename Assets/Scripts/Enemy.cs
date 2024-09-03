@@ -8,6 +8,13 @@ public class Enemy : MonoBehaviour
     private float m_speed = 5f;
     protected float Speed { get { return m_speed; } }
 
+    [SerializeField]
+    private GameObject m_powerUp;
+    [SerializeField]
+    private Quaternion m_powerUpRotation;
+    [SerializeField]
+    private float powerUpDropChance = 0.9f;
+
     protected Rigidbody Rb { get; private set; }
     protected Vector3 XZDirectionUnitVector { get; private set; }
     protected readonly float RotationSpeed = 10000f;
@@ -30,6 +37,13 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Weapon"))
         {
             GameManager.Instance.AddPoint();
+
+            float randomValue = Random.Range(0f, 1f);
+
+            if (randomValue <= powerUpDropChance)
+                Instantiate(m_powerUp, new Vector3 (transform.position.x, m_powerUp.transform.position.y, transform.position.z), 
+                    m_powerUp.transform.rotation);
+
             Destroy(gameObject);
         }
     }
