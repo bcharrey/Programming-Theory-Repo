@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    private float rotationSpeed = 60f;
+    
     void Update()
     {
-        
+        // Rotate the PowerUp game object around its Z-axis
+        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
     }
 }

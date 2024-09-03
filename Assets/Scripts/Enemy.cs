@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Quaternion m_powerUpRotation;
     [SerializeField]
-    private float powerUpDropChance = 0.9f;
+    private float powerUpDropChance = 0.95f;
 
     protected Rigidbody Rb { get; private set; }
     protected Vector3 XZDirectionUnitVector { get; private set; }
