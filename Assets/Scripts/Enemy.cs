@@ -24,4 +24,12 @@ public class Enemy : MonoBehaviour
         // Enemy is always looking at the player
         transform.LookAt(PlayerController.Instance.transform);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Weapon"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
