@@ -3401,21 +3401,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400a446864f19c8489de981bd769783c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScoreText: {fileID: 1120683692}
-  playerNameText: {fileID: 191756233}
-  bestScoreText: {fileID: 1549657963}
-  gameOverScreen: {fileID: 416339772}
+  m_currentScoreText: {fileID: 1120683692}
+  m_playerNameText: {fileID: 191756233}
+  m_bestScoreText: {fileID: 1549657963}
+  m_gameOverScreen: {fileID: 416339772}
   m_areaLimitUpperLeft: {fileID: 2140226801}
   m_areaLimitLowerLeft: {fileID: 2036014044}
-  enemyPrefabs:
+  m_enemyPrefabs:
   - {fileID: 3888267440409907295, guid: d82a4a1505528cf4fb0c65e1fae8b579, type: 3}
   - {fileID: 8904647488523182720, guid: 2d7f81ec53692034f898f7218481bb30, type: 3}
-  enemySpawnAreas:
+  m_enemySpawnAreas:
   - {fileID: 1985241780}
   - {fileID: 2125460541}
   - {fileID: 873421417}
   - {fileID: 445993238}
-  enemySpawnDelay: 2
+  m_enemySpawnDelay: 2
 --- !u!4 &2111258143
 Transform:
   m_ObjectHideFlags: 0
@@ -3894,6 +3894,7 @@ SceneRoots:
   - {fileID: 947738470}
   - {fileID: 500476257}
   - {fileID: 2484515396194498317}
+  - {fileID: 563178892}
   - {fileID: 1142352683}
   - {fileID: 591133143}
   - {fileID: 583038098}
@@ -3903,4 +3904,3 @@ SceneRoots:
   - {fileID: 2140226801}
   - {fileID: 2036014044}
   - {fileID: 1925881391}
-  - {fileID: 563178892}

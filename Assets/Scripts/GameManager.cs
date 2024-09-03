@@ -12,35 +12,33 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField]
-    private TextMeshProUGUI currentScoreText;
+    private TextMeshProUGUI m_currentScoreText;
     [SerializeField]
-    private TextMeshProUGUI playerNameText;
+    private TextMeshProUGUI m_playerNameText;
     [SerializeField]
-    private TextMeshProUGUI bestScoreText;
+    private TextMeshProUGUI m_bestScoreText;
     [SerializeField]
-    private GameObject gameOverScreen;
+    private GameObject m_gameOverScreen;
 
     // Limits of the game area
     [SerializeField]
     private Transform m_areaLimitUpperLeft;
     [SerializeField]
     private Transform m_areaLimitLowerLeft;
-
     public Transform AreaLimitUpperLeft { get { return m_areaLimitUpperLeft; } }
     public Transform AreaLimitLowerLeft { get { return m_areaLimitLowerLeft; } }
 
     // Enemy spawn
     [SerializeField]
-    private GameObject[] enemyPrefabs;
+    private GameObject[] m_enemyPrefabs;
     [SerializeField]
-    private BoxCollider[] enemySpawnAreas;
-
-    // Enemy spawn
+    private BoxCollider[] m_enemySpawnAreas;
     [SerializeField]
-    private float enemySpawnDelay = 2f;
-    private float enemySpawnTimer = 0f;
+    private float m_enemySpawnDelay = 2f;
 
-    private int m_Points;
+    private float m_enemySpawnTimer = 0f;
+
+    private int m_points;
     //private bool m_GameOver = false;
 
     private void Awake()
@@ -56,37 +54,37 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        playerNameText.text = $"{MainManager.Instance.playerName} :";
+        m_playerNameText.text = $"{MainManager.Instance.PlayerName} :";
 
         MainManager.Instance.LoadBestScore();
-        bestScoreText.text = $"Best Score : {MainManager.Instance.bestScorePlayerName} : {MainManager.Instance.bestScore}";
+        m_bestScoreText.text = $"Best Score : {MainManager.Instance.BestScorePlayerName} : {MainManager.Instance.BestScore}";
 
         // Spawn an Enemy at the start
-        enemySpawnTimer = enemySpawnDelay;
+        m_enemySpawnTimer = m_enemySpawnDelay;
     }
 
     private void Update()
     {
         // Enemy spawn
-        enemySpawnTimer += Time.deltaTime;
+        m_enemySpawnTimer += Time.deltaTime;
 
-        if (enemySpawnTimer >= enemySpawnDelay)
+        if (m_enemySpawnTimer >= m_enemySpawnDelay)
         {
-            int randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            int randomIndex = UnityEngine.Random.Range(0, m_enemyPrefabs.Length);
 
-            Instantiate(enemyPrefabs[randomIndex], GenerateSpawnPosition(),
-                enemyPrefabs[randomIndex].transform.rotation);
+            Instantiate(m_enemyPrefabs[randomIndex], GenerateSpawnPosition(),
+                m_enemyPrefabs[randomIndex].transform.rotation);
 
-            enemySpawnTimer = 0f;
+            m_enemySpawnTimer = 0f;
         }
     }
 
     private Vector3 GenerateSpawnPosition()
     {
         // Select a random index to pick one of the four colliders
-        int randomIndex = UnityEngine.Random.Range(0, enemySpawnAreas.Length);
+        int randomIndex = UnityEngine.Random.Range(0, m_enemySpawnAreas.Length);
 
-        BoxCollider boxCollider = enemySpawnAreas[randomIndex];
+        BoxCollider boxCollider = m_enemySpawnAreas[randomIndex];
 
         // Get the center and size of the box collider in local space
         Vector3 boxLocalCenter = boxCollider.center;
@@ -109,8 +107,8 @@ public class GameManager : MonoBehaviour
 
     public void AddPoint()
     {
-        m_Points++;
-        currentScoreText.text = $"Score : {m_Points}";
+        m_points++;
+        m_currentScoreText.text = $"Score : {m_points}";
     }
 
     //public void GameOver()

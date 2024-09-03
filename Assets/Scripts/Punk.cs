@@ -9,8 +9,8 @@ public class Punk : Enemy
         base.Update();
 
         // Create a movement vector
-        Vector3 move = transform.position + Speed * Time.fixedDeltaTime * XZDirectionUnitVector;
+        Vector3 move = transform.position + Speed * Time.fixedDeltaTime * m_xzDirectionUnitVector;
 
-        Rb.MovePosition(move);
+        m_rigidBody.MovePosition(move);
     }
 }

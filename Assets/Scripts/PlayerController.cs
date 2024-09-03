@@ -9,21 +9,21 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
     
-    public float moveSpeed = 25f;
+    public float MoveSpeed = 25f;
 
     [SerializeField]
-    private float attackRotationSpeed = 2000f;
+    private float m_attackRotationSpeed = 2000f;
     [SerializeField]
-    private float attackCycleDuration = 5f;
+    private float m_attackCycleDuration = 5f;
     [SerializeField]
     private GameObject m_weapon;
     public GameObject Weapon { get { return m_weapon; } }
 
-    private Rigidbody rb;
+    private Rigidbody m_rigidBody;
 
-    private readonly float rotationSpeed = 50f;
+    private readonly float m_rotationSpeed = 50f;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance != null)
         {
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Get the Rigidbody component
-        rb = GetComponent<Rigidbody>();
+        m_rigidBody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -68,23 +68,23 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement(Vector3 move)
     {
         // Apply movement using Rigidbody
-        rb.velocity = move * moveSpeed;
+        m_rigidBody.velocity = move * MoveSpeed;
 
         // Clamp the player's position within the screen bounds
         float leftLimitX = Math.Abs(GameManager.Instance.AreaLimitLowerLeft.position.x);
-        float clampedPositionX = Mathf.Clamp(rb.position.x, -leftLimitX, leftLimitX);
-        float clampedPositionZ = Mathf.Clamp(rb.position.z, GameManager.Instance.AreaLimitLowerLeft.position.z,
+        float clampedPositionX = Mathf.Clamp(m_rigidBody.position.x, -leftLimitX, leftLimitX);
+        float clampedPositionZ = Mathf.Clamp(m_rigidBody.position.z, GameManager.Instance.AreaLimitLowerLeft.position.z,
             GameManager.Instance.AreaLimitUpperLeft.position.z);
-        rb.position = new Vector3(clampedPositionX, rb.position.y, clampedPositionZ);
+        m_rigidBody.position = new Vector3(clampedPositionX, m_rigidBody.position.y, clampedPositionZ);
     }
 
     private void HandleAttack(Vector3 move)
     {
         // Player attacks by spinning with his weapon for attackCycleDuration / 2
         // Then does not attack until attackCycleDuration / 2
-        if (Time.time % attackCycleDuration < attackCycleDuration / 2)
+        if (Time.time % m_attackCycleDuration < m_attackCycleDuration / 2)
         {
-            transform.Rotate(0, attackRotationSpeed * Time.deltaTime, 0);
+            transform.Rotate(0, m_attackRotationSpeed * Time.deltaTime, 0);
             m_weapon.SetActive(true);
         }
         else
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
             if (move != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
             }
         }
     }

@@ -5,25 +5,23 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float m_speed = 5f;
+    private float m_speed = 10f;
     protected float Speed { get { return m_speed; } }
 
     [SerializeField]
-    private GameObject m_powerUp;
+    private GameObject m_DroppedPowerUp;
     [SerializeField]
-    private Quaternion m_powerUpRotation;
-    [SerializeField]
-    private float powerUpDropChance = 0.95f;
+    private float m_powerUpDropChance = 0.50f;
 
-    protected Rigidbody Rb { get; private set; }
-    protected Vector3 XZDirectionUnitVector { get; private set; }
-    protected readonly float RotationSpeed = 10000f;
+    protected Rigidbody m_rigidBody { get; private set; }
+    protected Vector3 m_xzDirectionUnitVector { get; private set; }
+    protected readonly float m_rotationSpeed = 10000f;
     
     // Start is called before the first frame update
     void Start()
     {
-        Rb = GetComponent<Rigidbody>();
-        XZDirectionUnitVector = (PlayerController.Instance.transform.position - transform.position).normalized;
+        m_rigidBody = GetComponent<Rigidbody>();
+        m_xzDirectionUnitVector = (PlayerController.Instance.transform.position - transform.position).normalized;
     }
     
     protected virtual void Update()
@@ -40,9 +38,9 @@ public class Enemy : MonoBehaviour
 
             float randomValue = Random.Range(0f, 1f);
 
-            if (randomValue <= powerUpDropChance)
-                Instantiate(m_powerUp, new Vector3 (transform.position.x, m_powerUp.transform.position.y, transform.position.z), 
-                    m_powerUp.transform.rotation);
+            if (randomValue <= m_powerUpDropChance)
+                Instantiate(m_DroppedPowerUp, new Vector3 (transform.position.x, m_DroppedPowerUp.transform.position.y, transform.position.z), 
+                    m_DroppedPowerUp.transform.rotation);
 
             Destroy(gameObject);
         }

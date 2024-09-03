@@ -15,19 +15,19 @@ using UnityEngine.UI;
 public class MenuUIHandler : MonoBehaviour
 {
     [SerializeField]
-    private TMP_InputField nameInputField;
+    private TMP_InputField m_nameInputField;
     [SerializeField]
-    private TextMeshProUGUI nameText;
+    private TextMeshProUGUI m_nameText;
 
     public void StartGame()
     {
-        if (string.IsNullOrWhiteSpace(nameInputField.text))
+        if (string.IsNullOrWhiteSpace(m_nameInputField.text))
         {
-            nameText.color = Color.red;
+            m_nameText.color = Color.red;
         }
         else
         {
-            MainManager.Instance.playerName = nameInputField.text;
+            MainManager.Instance.PlayerName = m_nameInputField.text;
             SceneManager.LoadScene(1);
         }
     }

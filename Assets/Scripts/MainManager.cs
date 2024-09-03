@@ -7,9 +7,12 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance { get; private set; }
 
-    public string playerName;
-    public string bestScorePlayerName;
-    public int bestScore;
+    [HideInInspector]
+    public string PlayerName;
+    [HideInInspector]
+    public string BestScorePlayerName;
+    [HideInInspector]
+    public int BestScore;
 
     private void Awake()
     {
@@ -33,8 +36,8 @@ public class MainManager : MonoBehaviour
     public void SaveBestScore()
     {
         SaveData data = new SaveData();
-        data.bestScorePlayerName = playerName;
-        data.bestScore = bestScore;
+        data.bestScorePlayerName = PlayerName;
+        data.bestScore = BestScore;
 
         string json = JsonUtility.ToJson(data);
 
@@ -50,8 +53,8 @@ public class MainManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-            bestScorePlayerName = data.bestScorePlayerName;
-            bestScore = data.bestScore;
+            BestScorePlayerName = data.bestScorePlayerName;
+            BestScore = data.bestScore;
         }
     }
 }

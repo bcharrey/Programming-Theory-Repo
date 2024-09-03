@@ -1573,8 +1573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c37b64bf11fa1488a7144390f8a059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameInputField: {fileID: 79299487}
-  nameText: {fileID: 335449383}
+  m_nameInputField: {fileID: 79299487}
+  m_nameText: {fileID: 335449383}
 --- !u!1 &1350135289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,9 +2042,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89945740b2891d48a8ae7cdffa6dc2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: 
-  bestScorePlayerName: 
-  bestScore: 0
+  PlayerName: 
+  BestScorePlayerName: 
+  BestScore: 0
 --- !u!4 &1890895825
 Transform:
   m_ObjectHideFlags: 0
