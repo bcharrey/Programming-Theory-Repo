@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         Vector3 boxLocalCenter = boxCollider.center;
         Vector3 boxLocalSize = boxCollider.size;
 
-        // Generate a random point within the local space of the collider
+        // Generate a random point within the local XZ plane of the collider
         float spawnPosLocalX = UnityEngine.Random.Range(-boxLocalSize.x / 2, boxLocalSize.x / 2);
         float spawnPosLocalZ = UnityEngine.Random.Range(-boxLocalSize.z / 2, boxLocalSize.z / 2);
 
@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
 
         // Convert the local position to world space using the collider's transform
         Vector3 spawnWorldPosition = boxCollider.transform.TransformPoint(spawnLocalPosition);
+        // Y coordinate is 0 because the enemy has his feet on the ground
+        spawnWorldPosition.y = 0;
 
         return spawnWorldPosition;
     }
