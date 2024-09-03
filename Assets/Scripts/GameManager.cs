@@ -11,15 +11,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [HideInInspector]
+    public bool GameOver = false;
+
     // UI
+    [SerializeField]
+    private GameObject m_gameOverScreen;
+    public GameObject GameOverScreen { get { return m_gameOverScreen; } }
     [SerializeField]
     private TextMeshProUGUI m_currentScoreText;
     [SerializeField]
     private TextMeshProUGUI m_playerNameText;
     [SerializeField]
     private TextMeshProUGUI m_bestScoreText;
-    [SerializeField]
-    private GameObject m_gameOverScreen;
 
     // Limits of the game area
     [SerializeField]
@@ -40,7 +44,6 @@ public class GameManager : MonoBehaviour
     private float m_enemySpawnTimer = 0f;
 
     private int m_points;
-    //private bool m_GameOver = false;
 
     private void Awake()
     {

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float AttackCycleDuration = 5f;
 
     [SerializeField]
-    private float m_attackRotationSpeed = 2000f;
+    private float m_attackRotationSpeed = 1000f;
     [SerializeField]
     private GameObject m_weapon;
     public GameObject Weapon { get { return m_weapon; } }
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 move = CalculateMovementInput();
         HandleMovement(move);
@@ -108,12 +108,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Enemmy"))
-    //    {
-    //        Debug.Log("Game Over");
-    //        Destroy(gameObject);
-    //    }
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>() != null)
+        {
+            GameManager.Instance.GameOverScreen.SetActive(true);
+            gameObject.SetActive(false);
+        }
+    }
 }
