@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     private float enemySpawnTimer = 0f;
     private float enemySpawnDelay = 4f;
 
-    //private int m_Points;
+    public int m_Points;
     //private bool m_GameOver = false;
 
     private void Awake()
@@ -106,11 +106,11 @@ public class GameManager : MonoBehaviour
         return spawnWorldPosition;
     }
 
-    //void AddPoint(int point)
-    //{
-    //    m_Points += point;
-    //    ScoreText.text = $"Score : {m_Points}";
-    //}
+    public void AddPoint()
+    {
+        m_Points++;
+        currentScoreText.text = $"Score : {m_Points}";
+    }
 
     //public void GameOver()
     //{

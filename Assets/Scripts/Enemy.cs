@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Weapon"))
         {
+            GameManager.Instance.AddPoint();
             Destroy(gameObject);
         }
     }
