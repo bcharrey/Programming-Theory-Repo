@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 10
   m_DroppedPowerUp: {fileID: 6939064669948421151, guid: 1a1a4d5796a78304397c480298b345e4, type: 3}
-  m_powerUpDropChance: 0.5
+  m_powerUpDropChance: 0.75
 --- !u!54 &6946134270636243523
 Rigidbody:
   m_ObjectHideFlags: 0
