@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6617061661655551036}
   - component: {fileID: 6498257402989690460}
   - component: {fileID: 4278394354323847044}
+  - component: {fileID: 921636509046483592}
   m_Layer: 0
   m_Name: PowerBoost
   m_TagString: Untagged
@@ -96,3 +97,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe9d1a3aadb0f44c8bc47c2d29fe921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_duration: 10
+  scaleBoost: 1.5
+--- !u!64 &921636509046483592
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939064669948421151}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: f7ec8369cac1a7e4ab36747b35f91c24, type: 3}

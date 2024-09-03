@@ -1,23 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
+    
+    public float moveSpeed = 25f;
 
-    [SerializeField]
-    private float moveSpeed = 25f;
     [SerializeField]
     private float attackRotationSpeed = 2000f;
     [SerializeField]
     private float attackCycleDuration = 5f;
     [SerializeField]
-    private GameObject weapon;
-    //[SerializeField]
-    //private int powerUpAttackCycles = 2;
+    private GameObject m_weapon;
+    public GameObject Weapon { get { return m_weapon; } }
 
     private Rigidbody rb;
 
@@ -85,11 +85,11 @@ public class PlayerController : MonoBehaviour
         if (Time.time % attackCycleDuration < attackCycleDuration / 2)
         {
             transform.Rotate(0, attackRotationSpeed * Time.deltaTime, 0);
-            weapon.SetActive(true);
+            m_weapon.SetActive(true);
         }
         else
         {
-            weapon.SetActive(false);
+            m_weapon.SetActive(false);
 
             // Rotate the player to face the direction of movement
             if (move != Vector3.zero)
@@ -100,14 +100,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("PowerUp"))
-    //    {
-    //        Destroy(other.gameObject);
-    //        StartCoroutine(PowerupCountdownRoutine());
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<PowerUp>(out PowerUp powerUp))
+        {
+            StartCoroutine(powerUp.CountdownRoutine());
+            Destroy(other.gameObject);
+        }
+    }
 
     //private void OnCollisionEnter(Collision collision)
     //{
@@ -116,12 +116,5 @@ public class PlayerController : MonoBehaviour
     //        Debug.Log("Game Over");
     //        Destroy(gameObject);
     //    }
-    //}
-
-    //IEnumerator PowerupCountdownRoutine()
-    //{
-    //    weapon.transform.localScale = weapon.transform.localScale * 2;
-    //    yield return new WaitForSeconds(attackCycleDuration * powerUpAttackCycles);
-    //    weapon.transform.localScale = weapon.transform.localScale / 2;
     //}
 }

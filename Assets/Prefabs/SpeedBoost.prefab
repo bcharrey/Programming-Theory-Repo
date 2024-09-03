@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5564730122186454283}
   - component: {fileID: 3581846743137869012}
   - component: {fileID: 3314702873296824021}
+  - component: {fileID: 7744693203722917432}
   m_Layer: 0
   m_Name: SpeedBoost
   m_TagString: Untagged
@@ -96,3 +97,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b423a42fd8d8d4984d251b52631cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_duration: 10
+  m_speedMultiplier: 1.1
+--- !u!64 &7744693203722917432
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068244493443352989}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 44cb397c8b73c2f40bfa05c2199ffa2b, type: 3}

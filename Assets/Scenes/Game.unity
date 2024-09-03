@@ -1007,7 +1007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2723070020852149613, guid: 9ec050ce8b42ed940910084e8fb06b28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2723070020852149613, guid: 9ec050ce8b42ed940910084e8fb06b28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1045,6 +1045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5520298162097012765, guid: 9ec050ce8b42ed940910084e8fb06b28, type: 3}
+      propertyPath: m_weapon
+      value: 
+      objectReference: {fileID: 1297270425}
     - target: {fileID: 5520298162097012765, guid: 9ec050ce8b42ed940910084e8fb06b28, type: 3}
       propertyPath: AreaLimitLowerLeft
       value: 
@@ -2217,6 +2221,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4659579814028464, guid: 9020d2933ec6c0544965ea4b12952c42, type: 3}
   m_PrefabInstance: {fileID: 1186468290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1297270425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 718268448529559897, guid: 9ec050ce8b42ed940910084e8fb06b28, type: 3}
+  m_PrefabInstance: {fileID: 583038098}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1310151714
 PrefabInstance:
@@ -3406,6 +3415,7 @@ MonoBehaviour:
   - {fileID: 2125460541}
   - {fileID: 873421417}
   - {fileID: 445993238}
+  enemySpawnDelay: 2
 --- !u!4 &2111258143
 Transform:
   m_ObjectHideFlags: 0

@@ -36,8 +36,9 @@ public class GameManager : MonoBehaviour
     private BoxCollider[] enemySpawnAreas;
 
     // Enemy spawn
+    [SerializeField]
+    private float enemySpawnDelay = 2f;
     private float enemySpawnTimer = 0f;
-    private float enemySpawnDelay = 4f;
 
     private int m_Points;
     //private bool m_GameOver = false;
