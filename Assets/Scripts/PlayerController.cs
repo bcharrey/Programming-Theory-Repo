@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float AttackCycleDuration = 5f;
 
     [SerializeField]
-    private float m_attackRotationSpeed = 1000f;
+    private float m_attackRotationSpeed = 500f;
     [SerializeField]
     private GameObject m_weapon;
     public GameObject Weapon { get { return m_weapon; } }
