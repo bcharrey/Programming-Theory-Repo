@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    // UI
     [SerializeField]
     private TextMeshProUGUI m_currentScoreText;
     [SerializeField]
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        m_playerNameText.text = $"{MainManager.Instance.PlayerName} :";
+        m_playerNameText.text = $"{MainManager.Instance.PlayerName}";
 
         MainManager.Instance.LoadBestScore();
         m_bestScoreText.text = $"Best Score : {MainManager.Instance.BestScorePlayerName} : {MainManager.Instance.BestScore}";
