@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private readonly float m_rotationSpeed = 50f;
 
+    private Vector3 move = Vector3.zero;
+
     void Awake()
     {
         if (Instance != null)
@@ -41,9 +43,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 move = CalculateMovementInput();
         HandleMovement(move);
         HandleAttack(move);
+    }
+
+    private void Update()
+    {
+        move = CalculateMovementInput();
     }
 
     private Vector3 CalculateMovementInput()
@@ -83,7 +89,8 @@ public class PlayerController : MonoBehaviour
         // Then does not attack until attackCycleDuration / 2
         if (Time.time % AttackCycleDuration < AttackCycleDuration / 2)
         {
-            transform.Rotate(0, m_attackRotationSpeed * Time.deltaTime, 0);
+            Quaternion newRotation = Quaternion.Euler(0, m_attackRotationSpeed * Time.deltaTime, 0) * m_rigidBody.rotation;
+            m_rigidBody.MoveRotation(newRotation);
             m_weapon.SetActive(true);
         }
         else
