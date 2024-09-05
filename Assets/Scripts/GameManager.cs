@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [HideInInspector]
-    public bool GameOver = false;
+    //[HideInInspector]
+    //public bool GameOver = false;
 
     // UI
     [SerializeField]
@@ -115,15 +115,13 @@ public class GameManager : MonoBehaviour
         m_currentScoreText.text = $"Score : {m_points}";
     }
 
-    //public void GameOver()
-    //{
-    //    m_GameOver = true;
-    //    GameOverScreen.SetActive(true);
-
-    //    if (m_Points > MainManager.Instance.bestScore)
-    //    {
-    //        MainManager.Instance.bestScore = m_Points;
-    //        MainManager.Instance.SaveBestScore();
-    //    }
-    //}
+    public void GameOver()
+    {
+        GameOverScreen.SetActive(true);
+        if (m_points > MainManager.Instance.BestScore)
+        {
+            MainManager.Instance.BestScore = m_points;
+            MainManager.Instance.SaveBestScore();
+        }
+    }
 }

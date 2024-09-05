@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            GameManager.Instance.GameOverScreen.SetActive(true);
+            GameManager.Instance.GameOver();
             gameObject.SetActive(false);
         }
     }

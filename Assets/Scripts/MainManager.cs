@@ -11,7 +11,7 @@ public class MainManager : MonoBehaviour
     public string PlayerName;
     [HideInInspector]
     public string BestScorePlayerName;
-    [HideInInspector]
+
     public int BestScore;
 
     private void Awake()
