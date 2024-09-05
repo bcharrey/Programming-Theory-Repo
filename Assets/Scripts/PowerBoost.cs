@@ -21,6 +21,7 @@ public class PowerBoost : PowerUp
     {
         PlayerController.Instance.Weapon.transform.localScale /= m_scaleBoost;
         Vector3 position = PlayerController.Instance.Weapon.transform.localPosition;
+        // Bug here ?
         position.z -= m_playerWeaponZOffset;
         PlayerController.Instance.Weapon.transform.localPosition = position;
     }
