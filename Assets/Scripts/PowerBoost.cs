@@ -7,22 +7,29 @@ public class PowerBoost : PowerUp
     [SerializeField]
     private float m_scaleBoost = 1.5f;    
     [SerializeField]
-    private float m_playerWeaponZOffset = 1.5f;
+    private float m_playerWeaponOffset = 1.5f;
 
     public override void BoostPlayer()
     {
+        // Increase the scale of the weapon
         PlayerController.Instance.Weapon.transform.localScale *= m_scaleBoost;
-        Vector3 position = PlayerController.Instance.Weapon.transform.localPosition;
-        position.z += m_playerWeaponZOffset;
-        PlayerController.Instance.Weapon.transform.localPosition = position;
+
+        // Adding an offset to the position of the weapon relative to the player,
+        // so that the weapon does not go into the player.
+        // Player Weapon's RigidBody's Interpolate must be set to none otherwise it causes unwanted offset
+        Vector3 playerWeaponOffsetPosition = PlayerController.Instance.Weapon.transform.up * m_playerWeaponOffset;
+        PlayerController.Instance.Weapon.transform.position += playerWeaponOffsetPosition;
     }
 
     public override void UnboostPlayer()
     {
+        // Decrease the scale of the weapon
         PlayerController.Instance.Weapon.transform.localScale /= m_scaleBoost;
-        Vector3 position = PlayerController.Instance.Weapon.transform.localPosition;
-        // Bug here ?
-        position.z -= m_playerWeaponZOffset;
-        PlayerController.Instance.Weapon.transform.localPosition = position;
+
+        // Reducing the offset between the position of the weapon and the position of the player,
+        // so that the weapon goes back to its original position.
+        // Player Weapon's RigidBody's Interpolate must be set to none otherwise it causes unwanted offset
+        Vector3 playerWeaponOffsetPosition = -PlayerController.Instance.Weapon.transform.up * m_playerWeaponOffset;
+        PlayerController.Instance.Weapon.transform.position += playerWeaponOffsetPosition;
     }
 }
