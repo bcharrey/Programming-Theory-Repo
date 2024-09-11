@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Update()
     {
         // Enemy is always looking at the player
-        transform.LookAt(PlayerController.Instance.transform);
+        m_rigidBody.MoveRotation(Quaternion.LookRotation(PlayerController.Instance.transform.position - transform.position));
     }
 
     private void OnCollisionEnter(Collision collision)
