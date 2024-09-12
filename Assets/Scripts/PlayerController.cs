@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PowerUp>(out PowerUp powerUp))
+        if (other.TryGetComponent(out PowerUp powerUp))
         {
             StartCoroutine(powerUp.CountdownRoutine());
             Destroy(other.gameObject);
