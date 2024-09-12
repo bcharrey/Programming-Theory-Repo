@@ -1237,6 +1237,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1323960117129055595, guid: 9ec050ce8b42ed940910084e8fb06b28, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2723070020852149613, guid: 9ec050ce8b42ed940910084e8fb06b28, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
