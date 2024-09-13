@@ -25,14 +25,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI m_bestScoreText;
 
-    // Limits of the game area
-    [SerializeField]
-    private Transform m_areaLimitUpperLeft;
-    [SerializeField]
-    private Transform m_areaLimitLowerLeft;
-    public Transform AreaLimitUpperLeft { get { return m_areaLimitUpperLeft; } }
-    public Transform AreaLimitLowerLeft { get { return m_areaLimitLowerLeft; } }
-
     // Enemy spawn
     [SerializeField]
     private GameObject[] m_enemyPrefabs;

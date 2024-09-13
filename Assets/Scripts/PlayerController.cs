@@ -74,13 +74,6 @@ public class PlayerController : MonoBehaviour
     {
         // Apply movement using Rigidbody
         m_rigidBody.velocity = move * MoveSpeed;
-
-        // Clamp the player's position within the screen bounds
-        float leftLimitX = Math.Abs(GameManager.Instance.AreaLimitLowerLeft.position.x);
-        float clampedPositionX = Mathf.Clamp(m_rigidBody.position.x, -leftLimitX, leftLimitX);
-        float clampedPositionZ = Mathf.Clamp(m_rigidBody.position.z, GameManager.Instance.AreaLimitLowerLeft.position.z,
-            GameManager.Instance.AreaLimitUpperLeft.position.z);
-        m_rigidBody.position = new Vector3(clampedPositionX, m_rigidBody.position.y, clampedPositionZ);
     }
 
     private void HandleAttack(Vector3 move)
