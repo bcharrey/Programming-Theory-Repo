@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private GameObject m_weapon;
     public GameObject Weapon { get { return m_weapon; } }
 
-    private Rigidbody m_rigidBody;
+    private Rigidbody m_rigidbody;
 
     private readonly float m_rotationSpeed = 50f;
 
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Get the Rigidbody component
-        m_rigidBody = GetComponent<Rigidbody>();
+        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement(Vector3 move)
     {
         // Apply movement using Rigidbody
-        m_rigidBody.velocity = move * MoveSpeed;
+        m_rigidbody.velocity = move * MoveSpeed;
     }
 
     private void HandleAttack(Vector3 move)
@@ -82,8 +82,8 @@ public class PlayerController : MonoBehaviour
         // Then does not attack until attackCycleDuration / 2
         if (Time.time % AttackCycleDuration < AttackCycleDuration / 2)
         {
-            Quaternion newRotation = Quaternion.Euler(0, m_attackRotationSpeed * Time.deltaTime, 0) * m_rigidBody.rotation;
-            m_rigidBody.MoveRotation(newRotation);
+            Quaternion newRotation = Quaternion.Euler(0, m_attackRotationSpeed * Time.deltaTime, 0) * m_rigidbody.rotation;
+            m_rigidbody.MoveRotation(newRotation);
             m_weapon.SetActive(true);
         }
         else
