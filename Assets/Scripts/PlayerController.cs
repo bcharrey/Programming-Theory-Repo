@@ -94,7 +94,8 @@ public class PlayerController : MonoBehaviour
             if (move != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
+                Quaternion smoothedRotation = Quaternion.Slerp(m_rigidbody.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
+                m_rigidbody.MoveRotation(smoothedRotation);
             }
         }
     }
