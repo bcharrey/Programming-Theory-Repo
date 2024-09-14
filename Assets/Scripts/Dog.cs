@@ -5,9 +5,9 @@ using UnityEngine;
 public class Dog : Enemy
 {
     // Update is called once per frame
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         // Calculate the direction from the dog to the player
         Vector3 direction = PlayerController.Instance.transform.position - transform.position;

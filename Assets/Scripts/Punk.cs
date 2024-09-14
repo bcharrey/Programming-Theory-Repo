@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Punk : Enemy
 {
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
         // Create a movement vector
         Vector3 move = transform.position + Speed * Time.deltaTime * m_xzDirectionUnitVector;

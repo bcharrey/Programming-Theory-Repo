@@ -24,7 +24,7 @@ public abstract class Enemy : MonoBehaviour
         m_xzDirectionUnitVector = (PlayerController.Instance.transform.position - transform.position).normalized;
     }
     
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         // Enemy is always looking at the player
         m_rigidbody.MoveRotation(Quaternion.LookRotation(PlayerController.Instance.transform.position - transform.position));
