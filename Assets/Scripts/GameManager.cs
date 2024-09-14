@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        // !! Don't forget to remove this
-        Application.targetFrameRate = 20;
+        // !! Uncomment this for testing at fixed framerate
+        //Application.targetFrameRate = 20;
+
         m_playerNameText.text = $"{MainManager.Instance.PlayerName}";
 
         MainManager.Instance.LoadBestScore();
