@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI m_playerNameText;
     [SerializeField]
     private TextMeshProUGUI m_bestScoreText;
+    [SerializeField]
+    private TextMeshProUGUI m_difficultyLevelText;
 
     // Enemy spawn
     [SerializeField]
@@ -32,10 +34,19 @@ public class GameManager : MonoBehaviour
     private BoxCollider[] m_enemySpawnAreas;
     [SerializeField]
     private float m_enemySpawnDelay = 2f;
+    [SerializeField]
+    private int m_pointsForNextDifficultyLevel = 5;
+    [SerializeField]
+    private float m_enemySpawnDelayReductionWithDifficulty = 0.8f;
+    [SerializeField]
+    private float m_enemySpeedBonusWithDifficulty = 1f;
+    public float EnemySpeedMultiplierWithDifficulty { get { return m_enemySpeedBonusWithDifficulty; } }
 
     private float m_enemySpawnTimer = 0f;
 
-    private int m_points;
+    private int m_points = 0;
+    private int m_difficultyLevel = 1;
+    public int DifficultyLevel { get { return m_difficultyLevel; } }
 
     private void Awake()
     {
@@ -108,6 +119,15 @@ public class GameManager : MonoBehaviour
     {
         m_points++;
         m_currentScoreText.text = $"Score : {m_points}";
+
+        // Rising difficulty level with points earned
+        if (m_points % m_pointsForNextDifficultyLevel == 0)
+        {
+            m_difficultyLevel++;
+            m_difficultyLevelText.text = $"Difficulty Level : {m_difficultyLevel}";
+
+            m_enemySpawnDelay *= m_enemySpawnDelayReductionWithDifficulty;
+        }
     }
 
     public void GameOver()

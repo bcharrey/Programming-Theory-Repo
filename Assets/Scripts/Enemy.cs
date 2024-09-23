@@ -22,6 +22,9 @@ public abstract class Enemy : MonoBehaviour
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_xzDirectionUnitVector = (PlayerController.Instance.transform.position - transform.position).normalized;
+
+        // Enemies are faster as difficulty level grows
+        m_speed += GameManager.Instance.EnemySpeedMultiplierWithDifficulty * GameManager.Instance.DifficultyLevel;
     }
     
     protected virtual void FixedUpdate()
