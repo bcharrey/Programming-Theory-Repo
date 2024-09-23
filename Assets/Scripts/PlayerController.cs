@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent(out PowerUp powerUp))
         {
             StartCoroutine(powerUp.CountdownRoutine());
-            Destroy(other.gameObject);
+            powerUp.PickedUp();
         }
     }
 
