@@ -8219,7 +8219,7 @@ MonoBehaviour:
   m_enemySpawnDelay: 2
   m_pointsForNextDifficultyLevel: 5
   m_enemySpawnDelayReductionWithDifficulty: 0.8
-  m_enemySpeedBonusWithDifficulty: 1
+  m_enemySpeedBonusWithDifficulty: 0.5
 --- !u!4 &2111258143
 Transform:
   m_ObjectHideFlags: 0

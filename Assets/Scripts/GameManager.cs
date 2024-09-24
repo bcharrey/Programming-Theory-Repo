@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float m_enemySpawnDelayReductionWithDifficulty = 0.8f;
     [SerializeField]
-    private float m_enemySpeedBonusWithDifficulty = 1f;
+    private float m_enemySpeedBonusWithDifficulty = 0.5f;
     public float EnemySpeedMultiplierWithDifficulty { get { return m_enemySpeedBonusWithDifficulty; } }
 
     private float m_enemySpawnTimer = 0f;
