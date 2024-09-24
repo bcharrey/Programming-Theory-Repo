@@ -5,9 +5,9 @@ using UnityEngine;
 public class PowerBoost : PowerUp
 {
     [SerializeField]
-    private float m_scaleBoost = 1.5f;    
+    private float m_scaleBoost = 1.3f;    
     [SerializeField]
-    private float m_playerWeaponOffset = 1.5f;
+    private float m_playerWeaponOffset = 1f;
 
     public override void BoostPlayer()
     {
