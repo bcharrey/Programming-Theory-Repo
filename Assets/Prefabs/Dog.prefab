@@ -5748,7 +5748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 10
-  m_DroppedPowerUp: {fileID: 6939064669948421151, guid: 1a1a4d5796a78304397c480298b345e4, type: 3}
+  m_DroppedPowerUp: {fileID: 1068244493443352989, guid: c175fe8337211e249a8e6e54d0b7cc75, type: 3}
   m_powerUpDropChance: 0.75
   m_hitSound: {fileID: -7875915311024738744}
 --- !u!65 &4134847719617372657
