@@ -11,9 +11,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    //[HideInInspector]
-    //public bool GameOver = false;
-
     // UI
     [SerializeField]
     private GameObject m_gameOverScreen;
