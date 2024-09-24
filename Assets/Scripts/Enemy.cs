@@ -16,7 +16,7 @@ public abstract class Enemy : MonoBehaviour
     private AudioSource m_hitSound;
 
     protected Rigidbody m_rigidbody { get; private set; }
-    protected Vector3 m_xzDirectionUnitVector { get; private set; }
+    protected Vector3 m_xzDirectionUnitVector;
     protected readonly float m_rotationSpeed = 10000f;
     
     // Start is called before the first frame update
