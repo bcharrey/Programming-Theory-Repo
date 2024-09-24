@@ -101,7 +101,7 @@ MonoBehaviour:
   m_duration: 10
   m_pickedUpSound: {fileID: -4259715044064084346}
   m_speedMultiplier: 1.1
-  m_attackCycleReduction: 0.9
+  m_attackRotationSpeedMultiplier: 1.2
 --- !u!64 &7744693203722917432
 MeshCollider:
   m_ObjectHideFlags: 0

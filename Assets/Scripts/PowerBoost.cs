@@ -7,7 +7,7 @@ public class PowerBoost : PowerUp
     [SerializeField]
     private float m_scaleBoost = 1.3f;    
     [SerializeField]
-    private float m_playerWeaponOffset = 1f;
+    private float m_playerWeaponOffset = 1.05f;
 
     public override void BoostPlayer()
     {

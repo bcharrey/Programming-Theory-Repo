@@ -101,7 +101,7 @@ MonoBehaviour:
   m_duration: 10
   m_pickedUpSound: {fileID: 7151634736383848191}
   m_scaleBoost: 1.3
-  m_playerWeaponOffset: 1
+  m_playerWeaponOffset: 1.05
 --- !u!64 &921636509046483592
 MeshCollider:
   m_ObjectHideFlags: 0

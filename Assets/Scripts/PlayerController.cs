@@ -10,10 +10,10 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
     
     public float MoveSpeed = 25f;
-    public float AttackCycleDuration = 5f;
+    public float AttackRotationSpeed = 500f;
 
     [SerializeField]
-    private float m_attackRotationSpeed = 500f;
+    private float m_attackCycleDuration = 5f;
     [SerializeField]
     private GameObject m_weapon;
     public GameObject Weapon { get { return m_weapon; } }
@@ -85,9 +85,9 @@ public class PlayerController : MonoBehaviour
     {
         // Player attacks by spinning with his weapon for attackCycleDuration / 2
         // Then does not attack until attackCycleDuration / 2
-        if (Time.time % AttackCycleDuration < AttackCycleDuration / 2)
+        if (Time.time % m_attackCycleDuration < m_attackCycleDuration / 2)
         {
-            Quaternion newRotation = Quaternion.Euler(0, m_attackRotationSpeed * Time.deltaTime, 0) * m_rigidbody.rotation;
+            Quaternion newRotation = Quaternion.Euler(0, AttackRotationSpeed * Time.deltaTime, 0) * m_rigidbody.rotation;
             m_rigidbody.MoveRotation(newRotation);
             m_weapon.SetActive(true);
         }
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
             m_hitSound.Play();
             GameManager.Instance.GameOver();
             m_weapon.SetActive(false);
-            
+
             // Rotating the player 90° to appear dead
             transform.Rotate(90, 0, 0);
             // Deactivating physics and collisions on the player
