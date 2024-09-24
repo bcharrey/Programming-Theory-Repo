@@ -78,17 +78,20 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // Enemy spawn
-        m_enemySpawnTimer += Time.deltaTime;
-
-        if (m_enemySpawnTimer >= m_enemySpawnDelay)
+        if (!m_gameIsOver)
         {
-            int randomIndex = UnityEngine.Random.Range(0, m_enemyPrefabs.Length);
+            // Enemy spawn
+            m_enemySpawnTimer += Time.deltaTime;
 
-            Instantiate(m_enemyPrefabs[randomIndex], GenerateSpawnPosition(),
-                m_enemyPrefabs[randomIndex].transform.rotation);
+            if (m_enemySpawnTimer >= m_enemySpawnDelay)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, m_enemyPrefabs.Length);
 
-            m_enemySpawnTimer = 0f;
+                Instantiate(m_enemyPrefabs[randomIndex], GenerateSpawnPosition(),
+                    m_enemyPrefabs[randomIndex].transform.rotation);
+
+                m_enemySpawnTimer = 0f;
+            }
         }
     }
 

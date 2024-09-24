@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Game Over on collision with Enemy
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
             m_hitSound.Play();
