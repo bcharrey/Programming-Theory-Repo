@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     
     public float MoveSpeed = 25f;
     public float AttackRotationSpeed = 500f;
+    public int CurrentPowerBoostsTaken = 0;
+    public int CurrentSpeedBoostsTaken = 0;
 
     [SerializeField]
     private float m_attackCycleDuration = 5f;
@@ -19,6 +21,10 @@ public class PlayerController : MonoBehaviour
     public GameObject Weapon { get { return m_weapon; } }
     [SerializeField]
     private AudioSource m_hitSound;
+    [SerializeField]
+    private int m_maxPowerBoostsTaken = 4;
+    [SerializeField]
+    private int m_maxSpeedBoostsTaken = 7;
 
     private Rigidbody m_rigidbody;
 
@@ -109,7 +115,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.TryGetComponent(out PowerUp powerUp))
         {
-            StartCoroutine(powerUp.CountdownRoutine());
+            if ((powerUp is PowerBoost && CurrentPowerBoostsTaken <= m_maxPowerBoostsTaken)
+                || (powerUp is SpeedBoost && CurrentSpeedBoostsTaken <= m_maxSpeedBoostsTaken))
+                StartCoroutine(powerUp.CountdownRoutine());
+
+            // PowerUp taken either way, but does not grant effect if max is reached
             powerUp.PickedUp();
         }
     }

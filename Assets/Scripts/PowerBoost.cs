@@ -11,6 +11,8 @@ public class PowerBoost : PowerUp
 
     public override void BoostPlayer()
     {
+        PlayerController.Instance.CurrentPowerBoostsTaken++;
+
         // Increase the scale of the weapon
         PlayerController.Instance.Weapon.transform.localScale *= m_scaleBoost;
 
@@ -23,6 +25,8 @@ public class PowerBoost : PowerUp
 
     public override void UnboostPlayer()
     {
+        PlayerController.Instance.CurrentPowerBoostsTaken--;
+
         // Decrease the scale of the weapon
         PlayerController.Instance.Weapon.transform.localScale /= m_scaleBoost;
 

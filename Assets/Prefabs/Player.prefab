@@ -1381,10 +1381,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 25
-  AttackCycleDuration: 5
-  m_attackRotationSpeed: 1000
+  AttackRotationSpeed: 750
+  CurrentPowerBoostsTaken: 0
+  CurrentSpeedBoostsTaken: 0
+  m_attackCycleDuration: 5
   m_weapon: {fileID: 718268448529559897}
   m_hitSound: {fileID: 1300259711336640191}
+  m_maxPowerBoostsTaken: 4
+  m_maxSpeedBoostsTaken: 7
 --- !u!54 &1323960117129055595
 Rigidbody:
   m_ObjectHideFlags: 0

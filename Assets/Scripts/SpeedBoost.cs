@@ -11,12 +11,16 @@ public class SpeedBoost : PowerUp
 
     public override void BoostPlayer()
     {
+        PlayerController.Instance.CurrentSpeedBoostsTaken++;
+
         PlayerController.Instance.MoveSpeed *= m_speedMultiplier;
         PlayerController.Instance.AttackRotationSpeed *= m_attackRotationSpeedMultiplier;
     }
 
     public override void UnboostPlayer()
     {
+        PlayerController.Instance.CurrentSpeedBoostsTaken--;
+
         PlayerController.Instance.MoveSpeed /= m_speedMultiplier;
         PlayerController.Instance.AttackRotationSpeed /= m_attackRotationSpeedMultiplier;
     }
