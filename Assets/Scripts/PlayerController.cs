@@ -138,6 +138,9 @@ public class PlayerController : MonoBehaviour
             // Deactivating physics and collisions on the player
             m_rigidbody.isKinematic = true;
             m_rigidbody.detectCollisions = false;
+
+            // Destroying the enemy gameobject
+            Destroy(collision.gameObject);
         }
     }
 }
