@@ -12,6 +12,8 @@ public abstract class Enemy : MonoBehaviour
     private GameObject m_DroppedPowerUp;
     [SerializeField]
     private float m_powerUpDropChance = 0.50f;
+    [SerializeField]
+    private AudioSource m_hitSound;
 
     protected Rigidbody m_rigidbody { get; private set; }
     protected Vector3 m_xzDirectionUnitVector { get; private set; }
@@ -45,7 +47,14 @@ public abstract class Enemy : MonoBehaviour
                 Instantiate(m_DroppedPowerUp, new Vector3 (transform.position.x, m_DroppedPowerUp.transform.position.y, transform.position.z), 
                     m_DroppedPowerUp.transform.rotation);
 
-            Destroy(gameObject);
+            m_hitSound.Play();
+
+            // Disable visual and collider
+            GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+
+            // Destroy after the audio finishes playing
+            Destroy(gameObject, m_hitSound.clip.length);
         }
     }
 }
