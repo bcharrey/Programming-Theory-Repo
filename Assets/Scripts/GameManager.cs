@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
     private int m_difficultyLevel = 1;
     public int DifficultyLevel { get { return m_difficultyLevel; } }
 
+    private bool m_gameIsOver = false;
+    public bool GameIsOver { get { return m_gameIsOver; } }
+
     private void Awake()
     {
         if (Instance != null)
@@ -132,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        m_gameIsOver = true;
         GameOverScreen.SetActive(true);
         if (m_points > MainManager.Instance.BestScore)
         {

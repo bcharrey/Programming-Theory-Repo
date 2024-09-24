@@ -45,8 +45,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        HandleMovement(move);
-        HandleAttack(move);
+        if (!GameManager.Instance.GameIsOver)
+        {
+            HandleMovement(move);
+            HandleAttack(move);
+        }
     }
 
     private void Update()
@@ -117,7 +120,13 @@ public class PlayerController : MonoBehaviour
         {
             m_hitSound.Play();
             GameManager.Instance.GameOver();
-            gameObject.SetActive(false);
+            m_weapon.SetActive(false);
+            
+            // Rotating the player 90° to appear dead
+            transform.Rotate(90, 0, 0);
+            // Deactivating physics and collisions on the player
+            m_rigidbody.isKinematic = true;
+            m_rigidbody.detectCollisions = false;
         }
     }
 }
