@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject m_weapon;
     public GameObject Weapon { get { return m_weapon; } }
+    [SerializeField]
+    private AudioSource m_hitSound;
 
     private Rigidbody m_rigidbody;
 
@@ -105,7 +107,7 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent(out PowerUp powerUp))
         {
             StartCoroutine(powerUp.CountdownRoutine());
-            Destroy(other.gameObject);
+            powerUp.PickedUp();
         }
     }
 
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
+            m_hitSound.Play();
             GameManager.Instance.GameOver();
             gameObject.SetActive(false);
         }
