@@ -1,7 +1,9 @@
 using UnityEngine;
 
+// INHERITANCE
 public class Dog : Enemy
 {
+    // POLYMORPHISM
     protected override void FixedUpdate()
     {
         base.FixedUpdate();

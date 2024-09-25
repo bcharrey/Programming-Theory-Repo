@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+// INHERITANCE
 public abstract class PowerUp : MonoBehaviour
 {
     private float m_rotationSpeed = 60f;
@@ -19,7 +20,9 @@ public abstract class PowerUp : MonoBehaviour
         transform.Rotate(0, 0, m_rotationSpeed * Time.deltaTime);
     }
 
+    // POLYMORPHISM
     public abstract void BoostPlayer();
+    // POLYMORPHISM
     public abstract void UnboostPlayer();
 
     public IEnumerator CountdownRoutine()

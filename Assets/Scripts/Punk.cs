@@ -1,7 +1,9 @@
 using UnityEngine;
 
+// INHERITANCE
 public class Punk : Enemy
 {
+    // POLYMORPHISM
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -14,12 +16,12 @@ public class Punk : Enemy
 
     private void OnTriggerExit(Collider other)
     {
-        // When the Punk exits its spawn area, it enables collision with the Play area borders
+        // When the Punk exits the play area borders, it enables collision with the play area borders
         if (other.CompareTag("PlayAreaBorder"))
-            SwitchLayer("Punk");
+            SwitchCollisionLayer("Punk");
     }
 
-    public void SwitchLayer(string layerName)
+    public void SwitchCollisionLayer(string layerName)
     {
         // Get the layer index from the layer name
         int layerIndex = LayerMask.NameToLayer(layerName);

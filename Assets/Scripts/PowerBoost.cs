@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// INHERITANCE
 public class PowerBoost : PowerUp
 {
     [SerializeField]
@@ -7,6 +8,7 @@ public class PowerBoost : PowerUp
     [SerializeField]
     private float m_playerWeaponOffset = 1.05f;
 
+    // POLYMORPHISM
     public override void BoostPlayer()
     {
         PlayerController.Instance.CurrentPowerBoostsTaken++;
@@ -21,6 +23,7 @@ public class PowerBoost : PowerUp
         PlayerController.Instance.Weapon.transform.position += playerWeaponOffsetPosition;
     }
 
+    // POLYMORPHISM
     public override void UnboostPlayer()
     {
         PlayerController.Instance.CurrentPowerBoostsTaken--;

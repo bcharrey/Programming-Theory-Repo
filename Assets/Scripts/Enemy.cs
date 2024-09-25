@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// INHERITANCE
 public abstract class Enemy : MonoBehaviour
 {
     // ENCAPSULATION
@@ -27,7 +28,8 @@ public abstract class Enemy : MonoBehaviour
         // Enemies are faster as difficulty level grows
         m_speed += GameManager.Instance.EnemySpeedBonusWithDifficulty * GameManager.Instance.DifficultyLevel;
     }
-    
+
+    // POLYMORPHISM
     protected virtual void FixedUpdate()
     {
         // Enemy is always looking at the player
