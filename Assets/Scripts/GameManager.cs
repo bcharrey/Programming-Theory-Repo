@@ -1,17 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // ENCAPSULATION
     public static GameManager Instance { get; private set; }
 
     // UI
+    // ENCAPSULATION
     [SerializeField]
     private GameObject m_gameOverScreen;
     public GameObject GameOverScreen { get { return m_gameOverScreen; } }
@@ -35,16 +31,18 @@ public class GameManager : MonoBehaviour
     private int m_pointsForNextDifficultyLevel = 5;
     [SerializeField]
     private float m_enemySpawnDelayReductionWithDifficulty = 0.8f;
+    // ENCAPSULATION
     [SerializeField]
     private float m_enemySpeedBonusWithDifficulty = 0.5f;
-    public float EnemySpeedMultiplierWithDifficulty { get { return m_enemySpeedBonusWithDifficulty; } }
+    public float EnemySpeedBonusWithDifficulty { get { return m_enemySpeedBonusWithDifficulty; } }
 
     private float m_enemySpawnTimer = 0f;
 
     private int m_points = 0;
+    // ENCAPSULATION
     private int m_difficultyLevel = 1;
     public int DifficultyLevel { get { return m_difficultyLevel; } }
-
+    // ENCAPSULATION
     private bool m_gameIsOver = false;
     public bool GameIsOver { get { return m_gameIsOver; } }
 

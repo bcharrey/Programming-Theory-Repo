@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PowerUp : MonoBehaviour
 {
     private float m_rotationSpeed = 60f;
 
+    // ENCAPSULATION
     [SerializeField]
     private float m_duration = 10f;
     protected float Duration { get { return m_duration; } }

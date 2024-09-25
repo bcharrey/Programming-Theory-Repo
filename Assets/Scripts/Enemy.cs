@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    // ENCAPSULATION
     [SerializeField]
     private float m_speed = 10f;
     protected float Speed { get { return m_speed; } }
@@ -15,24 +14,24 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField]
     private AudioSource m_hitSound;
 
-    protected Rigidbody m_rigidbody { get; private set; }
+    // ENCAPSULATION
+    protected Rigidbody Rigidbody { get; private set; }
     protected Vector3 m_xzDirectionUnitVector;
     protected readonly float m_rotationSpeed = 10000f;
     
-    // Start is called before the first frame update
     void Start()
     {
-        m_rigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
         m_xzDirectionUnitVector = (PlayerController.Instance.transform.position - transform.position).normalized;
 
         // Enemies are faster as difficulty level grows
-        m_speed += GameManager.Instance.EnemySpeedMultiplierWithDifficulty * GameManager.Instance.DifficultyLevel;
+        m_speed += GameManager.Instance.EnemySpeedBonusWithDifficulty * GameManager.Instance.DifficultyLevel;
     }
     
     protected virtual void FixedUpdate()
     {
         // Enemy is always looking at the player
-        m_rigidbody.MoveRotation(Quaternion.LookRotation(PlayerController.Instance.transform.position - transform.position));
+        Rigidbody.MoveRotation(Quaternion.LookRotation(PlayerController.Instance.transform.position - transform.position));
     }
 
     private void OnCollisionEnter(Collision collision)

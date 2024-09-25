@@ -1,17 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
 public class MainManager : MonoBehaviour
 {
+    // ENCAPSULATION
     public static MainManager Instance { get; private set; }
 
     [HideInInspector]
     public string PlayerName;
     [HideInInspector]
     public string BestScorePlayerName;
-
+    [HideInInspector]
     public int BestScore;
 
     private void Awake()

@@ -1,21 +1,91 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
-    
-    public float MoveSpeed = 25f;
-    public float AttackRotationSpeed = 500f;
-    public int CurrentPowerBoostsTaken = 0;
-    public int CurrentSpeedBoostsTaken = 0;
+
+    // ENCAPSULATION
+    [SerializeField]
+    private float m_moveSpeed = 25f;
+    public float MoveSpeed
+    {
+        get { return m_moveSpeed; }
+        set
+        {
+            if (value < 0)
+            {
+                Debug.LogWarning("Attempted to set MoveSpeed to a negative value. Setting to 0 instead.");
+                m_moveSpeed = 0;
+            }
+            else
+            {
+                m_moveSpeed = value;
+            }
+        }
+    }
+
+    // ENCAPSULATION
+    [SerializeField]
+    private float m_attackRotationSpeed = 800f;
+    public float AttackRotationSpeed
+    {
+        get { return m_attackRotationSpeed; }
+        set
+        {
+            if (value < 0)
+            {
+                Debug.LogWarning("Attempted to set AttackRotationSpeed to a negative value. Setting to 0 instead.");
+                m_attackRotationSpeed = 0;
+            }
+            else
+            {
+                m_attackRotationSpeed = value;
+            }
+        }
+    }
+    // ENCAPSULATION
+    private int m_currentPowerBoostsTaken = 0;
+    public int CurrentPowerBoostsTaken
+    {
+        get { return m_currentPowerBoostsTaken; }
+        set
+        {
+            if (value < 0)
+            {
+                Debug.LogWarning("Attempted to set CurrentPowerBoostsTaken to a negative value. Setting to 0 instead.");
+                m_currentPowerBoostsTaken = 0;
+            }
+            else
+            {
+                m_currentPowerBoostsTaken = value;
+            }
+        }
+    }
+
+    // ENCAPSULATION
+    private int m_currentSpeedBoostsTaken = 0;
+    public int CurrentSpeedBoostsTaken
+    {
+        get { return m_currentSpeedBoostsTaken; }
+        set
+        {
+            if (value < 0)
+            {
+                Debug.LogWarning("Attempted to set CurrentSpeedBoostsTaken to a negative value. Setting to 0 instead.");
+                m_currentSpeedBoostsTaken = 0;
+            }
+            else
+            {
+                m_currentSpeedBoostsTaken = value;
+            }
+        }
+    }
 
     [SerializeField]
     private float m_attackCycleDuration = 5f;
+    [SerializeField]
+    private float m_lookRotationSpeed = 50f;
+    // ENCAPSULATION
     [SerializeField]
     private GameObject m_weapon;
     public GameObject Weapon { get { return m_weapon; } }
@@ -27,9 +97,6 @@ public class PlayerController : MonoBehaviour
     private int m_maxSpeedBoostsTaken = 7;
 
     private Rigidbody m_rigidbody;
-
-    private readonly float m_rotationSpeed = 50f;
-
     private Vector3 move = Vector3.zero;
 
     void Awake()
@@ -84,7 +151,7 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement(Vector3 move)
     {
         // Apply movement using Rigidbody
-        m_rigidbody.velocity = move * MoveSpeed;
+        m_rigidbody.velocity = move * m_moveSpeed;
     }
 
     private void HandleAttack(Vector3 move)
@@ -93,7 +160,7 @@ public class PlayerController : MonoBehaviour
         // Then does not attack until attackCycleDuration / 2
         if (Time.time % m_attackCycleDuration < m_attackCycleDuration / 2)
         {
-            Quaternion newRotation = Quaternion.Euler(0, AttackRotationSpeed * Time.deltaTime, 0) * m_rigidbody.rotation;
+            Quaternion newRotation = Quaternion.Euler(0, m_attackRotationSpeed * Time.deltaTime, 0) * m_rigidbody.rotation;
             m_rigidbody.MoveRotation(newRotation);
             m_weapon.SetActive(true);
         }
@@ -105,7 +172,7 @@ public class PlayerController : MonoBehaviour
             if (move != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(move);
-                Quaternion smoothedRotation = Quaternion.Slerp(m_rigidbody.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
+                Quaternion smoothedRotation = Quaternion.Slerp(m_rigidbody.rotation, targetRotation, Time.deltaTime * m_lookRotationSpeed);
                 m_rigidbody.MoveRotation(smoothedRotation);
             }
         }
@@ -115,8 +182,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.TryGetComponent(out PowerUp powerUp))
         {
-            if ((powerUp is PowerBoost && CurrentPowerBoostsTaken <= m_maxPowerBoostsTaken)
-                || (powerUp is SpeedBoost && CurrentSpeedBoostsTaken <= m_maxSpeedBoostsTaken))
+            if ((powerUp is PowerBoost && m_currentPowerBoostsTaken <= m_maxPowerBoostsTaken)
+                || (powerUp is SpeedBoost && m_currentSpeedBoostsTaken <= m_maxSpeedBoostsTaken))
                 StartCoroutine(powerUp.CountdownRoutine());
 
             // PowerUp taken either way, but does not grant effect if max is reached
