@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        // Instanciating the Instance
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // Get the Rigidbody component
+        // Getting the Rigidbody component
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -120,16 +121,20 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.GameIsOver)
         {
+            // ABSTRACTION
             HandleMovement(move);
+            // ABSTRACTION
             HandleAttack(move);
         }
     }
 
     private void Update()
     {
+        // ABSTRACTION
         move = CalculateMovementInput();
     }
 
+    // ABSTRACTION
     private Vector3 CalculateMovementInput()
     {
         // Get input from keyboard
@@ -148,33 +153,56 @@ public class PlayerController : MonoBehaviour
         return move;
     }
 
+    // ABSTRACTION
     private void HandleMovement(Vector3 move)
     {
         // Apply movement using Rigidbody
         m_rigidbody.velocity = move * m_moveSpeed;
     }
 
+    // ABSTRACTION
     private void HandleAttack(Vector3 move)
     {
         // Player attacks by spinning with his weapon for attackCycleDuration / 2
         // Then does not attack until attackCycleDuration / 2
         if (Time.time % m_attackCycleDuration < m_attackCycleDuration / 2)
         {
-            Quaternion newRotation = Quaternion.Euler(0, m_attackRotationSpeed * Time.deltaTime, 0) * m_rigidbody.rotation;
-            m_rigidbody.MoveRotation(newRotation);
-            m_weapon.SetActive(true);
+            // ABSTRACTION
+            CycloneAttack();
         }
         else
         {
-            m_weapon.SetActive(false);
-
+            // ABSTRACTION
+            StopAttack();
             // Rotate the player to face the direction of movement
-            if (move != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(move);
-                Quaternion smoothedRotation = Quaternion.Slerp(m_rigidbody.rotation, targetRotation, Time.deltaTime * m_lookRotationSpeed);
-                m_rigidbody.MoveRotation(smoothedRotation);
-            }
+            // ABSTRACTION
+            FaceMovementDirection();
+        }
+    }
+
+    // ABSTRACTION
+    private void CycloneAttack()
+    {
+        if (!m_weapon.activeSelf)
+            m_weapon.SetActive(true);
+        Quaternion newRotation = Quaternion.Euler(0, m_attackRotationSpeed * Time.deltaTime, 0) * m_rigidbody.rotation;
+        m_rigidbody.MoveRotation(newRotation);
+    }
+
+    // ABSTRACTION
+    private void StopAttack()
+    {
+        m_weapon.SetActive(false);
+    }
+
+    // ABSTRACTION
+    private void FaceMovementDirection()
+    {
+        if (move != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(move);
+            Quaternion smoothedRotation = Quaternion.Slerp(m_rigidbody.rotation, targetRotation, Time.deltaTime * m_lookRotationSpeed);
+            m_rigidbody.MoveRotation(smoothedRotation);
         }
     }
 
@@ -182,32 +210,58 @@ public class PlayerController : MonoBehaviour
     {
         if (other.TryGetComponent(out PowerUp powerUp))
         {
-            if ((powerUp is PowerBoost && m_currentPowerBoostsTaken <= m_maxPowerBoostsTaken)
-                || (powerUp is SpeedBoost && m_currentSpeedBoostsTaken <= m_maxSpeedBoostsTaken))
-                StartCoroutine(powerUp.CountdownRoutine());
-
-            // PowerUp taken either way, but does not grant effect if max is reached
-            powerUp.PickedUp();
+            // ABSTRACTION
+            PickUpPowerUp(powerUp);
         }
+    }
+
+    // ABSTRACTION
+    private void PickUpPowerUp(PowerUp powerUp)
+    {
+        // ABSTRACTION
+        if (DoesPowerUpGrantEffect(powerUp))
+            StartCoroutine(powerUp.CountdownRoutine());
+
+        // PowerUp picked up either way, but does not grant effect if max is reached
+        powerUp.PickedUp();
+    }
+
+    // ABSTRACTION
+    private bool DoesPowerUpGrantEffect(PowerUp powerUp)
+    {
+        if (powerUp is PowerBoost && m_currentPowerBoostsTaken <= m_maxPowerBoostsTaken)
+            return true;
+
+        if (powerUp is SpeedBoost && m_currentSpeedBoostsTaken <= m_maxSpeedBoostsTaken)
+            return true;
+
+        return false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Game Over on collision with Enemy
+        // Checking if hit by an enemy
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            m_hitSound.Play();
-            GameManager.Instance.GameOver();
-            m_weapon.SetActive(false);
-
-            // Rotating the player 90° to appear dead
-            transform.Rotate(90, 0, 0);
-            // Deactivating physics and collisions on the player
-            m_rigidbody.isKinematic = true;
-            m_rigidbody.detectCollisions = false;
-
-            // Destroying the enemy gameobject
-            Destroy(collision.gameObject);
+            // ABSTRACTION
+            HitByEnnemy(collision);
         }
+    }
+
+    // ABSTRACTION
+    private void HitByEnnemy(Collision collision)
+    {
+        m_hitSound.Play();
+        m_weapon.SetActive(false);
+        GameManager.Instance.GameOver();
+
+        // Rotating the player 90° around X to appear dead
+        transform.Rotate(90, 0, 0);
+        // Deactivating physics and collisions on the player
+        m_rigidbody.isKinematic = true;
+        m_rigidbody.detectCollisions = false;
+
+        // Destroying the enemy gameobject
+        Destroy(collision.gameObject);
     }
 }

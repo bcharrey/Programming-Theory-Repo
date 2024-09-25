@@ -15,6 +15,7 @@ public class MainManager : MonoBehaviour
 
     private void Awake()
     {
+        // Instantiating the Instance
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -22,6 +23,7 @@ public class MainManager : MonoBehaviour
         }
 
         Instance = this;
+        // This instance is kept between scenes
         DontDestroyOnLoad(gameObject);
     }
 

@@ -8,6 +8,13 @@ public class Dog : Enemy
     {
         base.FixedUpdate();
 
+        // ABSTRACTION
+        MoveTowardsPlayer();
+    }
+
+    // ABSTRACTION
+    private void MoveTowardsPlayer()
+    {
         // Calculate the direction from the dog to the player
         Vector3 direction = PlayerController.Instance.transform.position - transform.position;
         direction.Normalize();

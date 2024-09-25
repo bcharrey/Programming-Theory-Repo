@@ -15,10 +15,12 @@ public class MenuUIHandler : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(m_nameInputField.text))
         {
+            // If name field empty, turn name text red
             m_nameText.color = Color.red;
         }
         else
         {
+            // Else, saving the name and loading the scene where the game happens
             MainManager.Instance.PlayerName = m_nameInputField.text;
             SceneManager.LoadScene(1);
         }

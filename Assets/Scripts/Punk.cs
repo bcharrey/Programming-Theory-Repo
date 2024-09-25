@@ -8,9 +8,15 @@ public class Punk : Enemy
     {
         base.FixedUpdate();
 
-        // Create a movement vector
-        Vector3 move = transform.position + Speed * Time.deltaTime * m_xzDirectionUnitVector;
+        // Move the punk towards where he's facing
+        // ABSTRACTION
+        MoveForward();
+    }
 
+    // ABSTRACTION
+    private void MoveForward()
+    {
+        Vector3 move = transform.position + Speed * Time.deltaTime * m_xzDirectionUnitVector;
         Rigidbody.MovePosition(move);
     }
 
@@ -39,9 +45,16 @@ public class Punk : Enemy
         // On colliding with a play area border, changes movement direction on XZ plane
         if (collision.gameObject.CompareTag("PlayAreaBorder"))
         {
-            Vector2 randomPoint = Random.insideUnitCircle.normalized;
-            // Convert to a Vector3 on the XZ plane
-            m_xzDirectionUnitVector = new Vector3(randomPoint.x, 0f, randomPoint.y);
+            // ABSTRACTION
+            ChangeXZDirection();
         }
+    }
+
+    // ABSTRACTION
+    private void ChangeXZDirection()
+    {
+        Vector2 randomPoint = Random.insideUnitCircle.normalized;
+        // Convert to a Vector3 on the XZ plane
+        m_xzDirectionUnitVector = new Vector3(randomPoint.x, 0f, randomPoint.y);
     }
 }

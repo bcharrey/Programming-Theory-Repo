@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Instanciating the Instance
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -62,38 +63,61 @@ public class GameManager : MonoBehaviour
         // !! Uncomment this for testing at fixed framerate
         //Application.targetFrameRate = 20;
 
+        // Setting the player name in UI
         m_playerNameText.text = $"{MainManager.Instance.PlayerName}";
 
-        MainManager.Instance.LoadBestScore();
-        m_bestScoreText.text = $"Best Score : {MainManager.Instance.BestScorePlayerName} : {MainManager.Instance.BestScore}";
+        // ABSTRACTION
+        SetBestScoreInUI();
 
-        // Spawn an Enemy at the start
+        // Setting the enemy spawn time directly at the enemy spawn delay
+        // in order to pawn an enemy at the start and avoid wait
         m_enemySpawnTimer = m_enemySpawnDelay;
     }
-
+    
     private void Update()
     {
         if (!m_gameIsOver)
         {
-            // Enemy spawn
-            m_enemySpawnTimer += Time.deltaTime;
-
-            if (m_enemySpawnTimer >= m_enemySpawnDelay)
-            {
-                int randomIndex = UnityEngine.Random.Range(0, m_enemyPrefabs.Length);
-
-                Instantiate(m_enemyPrefabs[randomIndex], GenerateSpawnPosition(),
-                    m_enemyPrefabs[randomIndex].transform.rotation);
-
-                m_enemySpawnTimer = 0f;
-            }
+            // ABSTRACTION
+            SpawnEnemyAtDelay();
         }
     }
 
+    // ABSTRACTION
+    private void SetBestScoreInUI()
+    {
+        // Setting the best score in UI
+        MainManager.Instance.LoadBestScore();
+        m_bestScoreText.text = $"Best Score : {MainManager.Instance.BestScorePlayerName} : {MainManager.Instance.BestScore}";
+    }
+
+    // ABSTRACTION
+    private void SpawnEnemyAtDelay()
+    {
+        m_enemySpawnTimer += Time.deltaTime;
+
+        if (m_enemySpawnTimer >= m_enemySpawnDelay)
+        {
+            // ABSTRACTION
+            SpawnEnemy();
+            m_enemySpawnTimer = 0f;
+        }
+    }
+
+    // ABSTRACTION
+    private void SpawnEnemy()
+    {
+        int randomIndex = Random.Range(0, m_enemyPrefabs.Length);
+        // ABSTRACTION
+        Instantiate(m_enemyPrefabs[randomIndex], GenerateSpawnPosition(),
+            m_enemyPrefabs[randomIndex].transform.rotation);
+    }
+
+    // ABSTRACTION
     private Vector3 GenerateSpawnPosition()
     {
         // Select a random index to pick one of the four colliders
-        int randomIndex = UnityEngine.Random.Range(0, m_enemySpawnAreas.Length);
+        int randomIndex = Random.Range(0, m_enemySpawnAreas.Length);
 
         BoxCollider boxCollider = m_enemySpawnAreas[randomIndex];
 
@@ -102,8 +126,8 @@ public class GameManager : MonoBehaviour
         Vector3 boxLocalSize = boxCollider.size;
 
         // Generate a random point within the local XZ plane of the collider
-        float spawnPosLocalX = UnityEngine.Random.Range(-boxLocalSize.x / 2, boxLocalSize.x / 2);
-        float spawnPosLocalZ = UnityEngine.Random.Range(-boxLocalSize.z / 2, boxLocalSize.z / 2);
+        float spawnPosLocalX = Random.Range(-boxLocalSize.x / 2, boxLocalSize.x / 2);
+        float spawnPosLocalZ = Random.Range(-boxLocalSize.z / 2, boxLocalSize.z / 2);
 
         // Create the local position based on the random values
         Vector3 spawnLocalPosition = new Vector3(spawnPosLocalX, 0, spawnPosLocalZ) + boxLocalCenter;
@@ -124,17 +148,30 @@ public class GameManager : MonoBehaviour
         // Rising difficulty level with points earned
         if (m_points % m_pointsForNextDifficultyLevel == 0)
         {
-            m_difficultyLevel++;
-            m_difficultyLevelText.text = $"Difficulty Level : {m_difficultyLevel}";
-
-            m_enemySpawnDelay *= m_enemySpawnDelayReductionWithDifficulty;
+            // ABSTRACTION
+            IncreaseDifficultyLevel();
         }
+    }
+
+    // ABSTRACTION
+    private void IncreaseDifficultyLevel()
+    {
+        m_difficultyLevel++;
+        m_difficultyLevelText.text = $"Difficulty Level : {m_difficultyLevel}";
+        m_enemySpawnDelay *= m_enemySpawnDelayReductionWithDifficulty;
     }
 
     public void GameOver()
     {
         m_gameIsOver = true;
         GameOverScreen.SetActive(true);
+        // ABSTRACTION
+        UpdateBestScore();
+    }
+
+    // ABSTRACTION
+    private void UpdateBestScore()
+    {
         if (m_points > MainManager.Instance.BestScore)
         {
             MainManager.Instance.BestScore = m_points;
